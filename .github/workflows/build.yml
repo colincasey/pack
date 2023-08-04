@@ -2,18 +2,6 @@ name: build
 
 on:
   push:
-    branches:
-      - main
-      - 'release/**'
-  pull_request:
-    paths-ignore:
-      - '**.md'
-      - 'resources/**'
-      - 'CODEOWNERS'
-      - 'LICENSE'
-    branches:
-      - main
-      - 'release/**'
 
 jobs:
   test:

@@ -1061,7 +1061,7 @@ api = "0.2"
 					})
 				})
 
-				it("fails if buildpack dependency could not be fetched", func() {
+				it.Focus("fails if buildpack dependency could not be fetched", func() {
 					metaBuildpackFolder := path.Join(tmpDir, "meta-buildpack")
 					err := os.Mkdir(metaBuildpackFolder, os.ModePerm)
 					h.AssertNil(t, err)
@@ -1116,6 +1116,9 @@ api = "0.2"
 						ClearCache: true,
 						Buildpacks: []string{metaBuildpackFolder},
 					})
+
+					fmt.Printf(err.Error())
+
 					h.AssertError(t, err, fmt.Sprintf("fetching package.toml dependencies (path='%s')", path.Join(metaBuildpackFolder, "package.toml")))
 					h.AssertError(t, err, "fetching dependencies (uri='../not-a-valid-dependency',image='')")
 				})
