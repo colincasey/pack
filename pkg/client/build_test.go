@@ -1117,7 +1117,11 @@ api = "0.2"
 						Buildpacks: []string{metaBuildpackFolder},
 					})
 
+					fmt.Println("")
 					fmt.Println(err.Error())
+					fmt.Println("")
+					fmt.Println(path.Join(metaBuildpackFolder, "package.toml"))
+					fmt.Println("")
 
 					h.AssertError(t, err, fmt.Sprintf("fetching package.toml dependencies (path='%s')", path.Join(metaBuildpackFolder, "package.toml")))
 					h.AssertError(t, err, "fetching dependencies (uri='../not-a-valid-dependency',image='')")
