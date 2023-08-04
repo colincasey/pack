@@ -10,7 +10,6 @@ import (
 	"io"
 	"net/http"
 	"os"
-	"path"
 	"path/filepath"
 	"runtime"
 	"strings"
@@ -991,11 +990,11 @@ func testBuild(t *testing.T, when spec.G, it spec.S) {
 
 			when("meta-buildpack folder is used", func() {
 				it("resolves buildpack", func() {
-					metaBuildpackFolder := path.Join(tmpDir, "meta-buildpack")
+					metaBuildpackFolder := filepath.Join(tmpDir, "meta-buildpack")
 					err := os.Mkdir(metaBuildpackFolder, os.ModePerm)
 					h.AssertNil(t, err)
 
-					err = os.WriteFile(path.Join(metaBuildpackFolder, "buildpack.toml"), []byte(`
+					err = os.WriteFile(filepath.Join(metaBuildpackFolder, "buildpack.toml"), []byte(`
 api = "0.2"
 
 [buildpack]
@@ -1010,7 +1009,7 @@ version = "local-meta-bp-version"
 					`), 0644)
 					h.AssertNil(t, err)
 
-					err = os.WriteFile(path.Join(metaBuildpackFolder, "package.toml"), []byte(`
+					err = os.WriteFile(filepath.Join(metaBuildpackFolder, "package.toml"), []byte(`
 [buildpack]
 uri = "."
 
@@ -1019,11 +1018,11 @@ uri = "../meta-buildpack-dependency"
 					`), 0644)
 					h.AssertNil(t, err)
 
-					metaBuildpackDependencyFolder := path.Join(tmpDir, "meta-buildpack-dependency")
+					metaBuildpackDependencyFolder := filepath.Join(tmpDir, "meta-buildpack-dependency")
 					err = os.Mkdir(metaBuildpackDependencyFolder, os.ModePerm)
 					h.AssertNil(t, err)
 
-					err = os.WriteFile(path.Join(metaBuildpackDependencyFolder, "buildpack.toml"), []byte(`
+					err = os.WriteFile(filepath.Join(metaBuildpackDependencyFolder, "buildpack.toml"), []byte(`
 api = "0.2"
 
 [buildpack]
